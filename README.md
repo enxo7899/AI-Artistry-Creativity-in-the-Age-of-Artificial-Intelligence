@@ -1,25 +1,28 @@
-# AI-Artistry-Creativity-in-the-Age-of-Artificial-Intelligence
-Final Project MSc Artificial Intelligence
+# AI Artistry: Creativity in the Age of Artificial Intelligence
 
-Here's a short narrative for the `README.md` of your project:
+MSc Artificial Intelligence dissertation, City, University of London (2024). Graduated with Distinction.
 
----
+This project asks how close generative models can get to human creative work, and how you would even measure that. It generates classical-style music and poetry, then combines the two into a single spoken-word-over-music piece.
 
-# AI-Artistry: Creativity in the Age of Artificial Intelligence
-**Final Project for MSc in Artificial Intelligence**
+## What's in the repo
 
-Welcome to the repository for *AI-Artistry: Creativity in the Age of Artificial Intelligence*, my final MSc project in Artificial Intelligence. This project explores the intersection of art and technology, demonstrating how AI models can be leveraged to create unique artistic outputs, including poetry and music generation.
+| Part | Approach | Folder |
+|---|---|---|
+| Music generation | Three sequence models trained on the **MAESTRO v3** piano dataset: LSTM, GRU (64- and 256-unit variants) and a Transformer, built in TensorFlow/Keras with MIDI processing via `pretty_midi` and `music21` | `Music Generation Models/` |
+| Poetry generation | **GPT-2** fine-tuned for poetry (Hugging Face Transformers) and compared against the base model | `Poetry Generation/` |
+| Music + poetry | Generated poems voiced with text-to-speech (gTTS) and layered over the generated music | `TTS Model Combining Music and Poetry/` |
 
-## Project Overview
-In this project, I have worked on AI models that generate new poetry and music. My approach was to  
+## Evaluation
 
-## Key Features
-- **Music Generation**: Custom LSTM, Transformer, and GRU models trained on classical music datasets to generate melodies, exploring the role of AI in music composition.
-- **Poetry Generation**: Fine-tuned GPT-2 models that produce poetry based on various themes and styles, compared with the base GPT-2 model to evaluate the impact of fine-tuning.
-- **Poetry Generation**: Combining music and the generated poetry utilizing a TTS model to create a final output. 
-- **Evaluation Metrics**: Tailor-made metrics to assess the quality of the generated outputs, focusing on both technical aspects (e.g., readability, sentiment) and domain-specific nuances (e.g., rhyme density, lyrical complexity).
+Generative output is hard to score with a single number, so I designed task-specific metrics:
 
-## Goals
-The project not only aims to produce compelling AI-generated art but also critically examines the relationship between AI and human creativity. Through the development of  models and custom evaluation criteria, this work seeks to understand the capabilities and limitations of AI in emulating human-like creative processes.
+- **Music:** note density, empty-beat ratio, pitch centricity and macroharmony, used to compare the LSTM, GRU and Transformer outputs against the training data.
+- **Poetry:** rhyme density, readability, sentiment and lyrical complexity, used to compare fine-tuned GPT-2 with the base model.
 
+## Running it
 
+The notebooks were written for Google Colab. The trained checkpoints and data files are too large for GitHub. The LSTM folder's README links to them; upload them into the Colab session, then run the `Generate_*` notebook for each model.
+
+## Stack
+
+Python · TensorFlow / Keras · Hugging Face Transformers (GPT-2) · pretty_midi · music21 · gTTS · Google Colab
